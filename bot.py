@@ -13,6 +13,7 @@ bot = commands.Bot(command_prefix="!", intents=discord.Intents.all())
 channel_id = ChannelId()
 bot_message = BotMessage()
 
+
 @bot.event
 async def on_ready():
     print(bot_message.start_bot_msg(bot.user.name))
@@ -21,6 +22,7 @@ async def on_ready():
         print(f"Commandes slash syncronisées: {len(synced)}")
     except Exception as e:
         print(e)
+
 
 @bot.event
 async def on_message(message: discord.Message):
@@ -60,6 +62,21 @@ async def on_message(message: discord.Message):
                 await message.channel.send(bot_message.clear_msg, delete_after=7.5)
         else:
             await message.channel.send(bot_message.clear_msg_failed, delete_after=7.5)
+
+
+@bot.tree.command(name="commands", description="Tester les embeds")
+async def commands(interaction: discord.Interaction):
+    embed = discord.Embed(
+        title="Test Titre",
+        description="Description de l'embed",
+        color=discord.Color.blue()
+        )
+    embed.add_field(name="Commands", value=bot_message.all_commands_msg, inline=False)
+    await interaction.response.send_message(embed=embed)
+
+
+    # if content == "!commands":
+    #     await message.channel.send(bot_message.all_commands_msg)
 
 
 @bot.tree.command(name="test", description="Tester les embeds")

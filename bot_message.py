@@ -19,6 +19,16 @@ class BotMessage:
             "https://emojikeyboard.top/fr/"
             ]
         self.emoji_url = "\n".join(url_emoji)
+        all_commands = [
+            "!bienvenue + @pseudo",
+            "!clear + nombre(exemple: 5)"
+            "/test",
+            "/warnguy + pseudo",
+            "/banguy + pseudo",
+            "/emoji"
+            ]
+        self.all_commands_msg = "\n".join(all_commands)
+        self.all_commands_msg_failed = ""
 
     def start_bot_msg(self, bot_user: str) -> str:
         return f"Bot allumé ! Connecté en tant que {bot_user}"
